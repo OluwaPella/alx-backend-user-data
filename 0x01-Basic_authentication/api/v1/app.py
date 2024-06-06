@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Route module for the API
+"""Route module for the API
 """
 from os import getenv
 from api.v1.views import app_views
@@ -19,7 +18,6 @@ def unauthorized(error) -> str:
     """ an unauthorize  function
     """
     return jsonify({"error": "Unauthorized"}), 401
-
 
 
 if __name__ == "__main__":
