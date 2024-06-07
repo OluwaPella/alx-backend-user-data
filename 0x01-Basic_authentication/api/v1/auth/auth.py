@@ -13,8 +13,9 @@ class Auth:
             return True
         if excluded_paths is None or []:
             return True
-        if excluded_paths is [/]:
-            return False
+        if path[-1] != "/":
+            if not(path := path + '/'):
+                return False
 
     def authorization_header(self, request=None) -> str:
         """logic that check auth header"""
