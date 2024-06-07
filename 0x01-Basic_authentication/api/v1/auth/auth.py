@@ -4,7 +4,7 @@ from typing import List, TypeVar
 from flask import request
 
 
-class auth:
+class Auth:
     """doc doc"""
 
 
