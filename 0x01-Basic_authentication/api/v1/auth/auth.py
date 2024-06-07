@@ -7,20 +7,17 @@ from flask import request
 
 
 class auth:
-    """auth designed to manage
-    user authentication api
+    """logic that designed manage
+    user authentication
     """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ auth checked if authentication will
-        be required also check take list of excluded path
-        auth wont be necessary
+        """logic that check if auth is required or not
         """
         return False
     
 
     def authorization_header(self, request=None) -> str:
-        """
-        this retrieve the authorize header from the
+        """logic that retrieve the authorize header from the
         request
         """
         return None
