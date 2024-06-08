@@ -24,3 +24,4 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """logic that identify current_user"""
         return None
+    
