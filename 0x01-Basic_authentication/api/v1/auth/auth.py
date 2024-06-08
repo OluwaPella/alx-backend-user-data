@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """doc doc """
-from typing import List, TypeVar
 from flask import request
+from typing import List, TypeVar
 
 
 class Auth:
