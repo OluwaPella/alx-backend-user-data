@@ -31,8 +31,9 @@ def forbidden(error) -> str:
     """Error handler: Forbidden"""
     return jsonify({"error": "Forbidden"}), 403
 
-@app.before_request
+"""@app.before_request
 def before_requests():
+doc doc
     if auth is None:
         return
     excluded_path = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
@@ -43,7 +44,7 @@ def before_requests():
         abort(401)
     if auth.current_user(request) is None:
         abort(403)
-
+        """
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
