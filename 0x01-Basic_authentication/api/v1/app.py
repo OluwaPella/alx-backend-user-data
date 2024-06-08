@@ -27,6 +27,7 @@ def unauthorized(error) -> str:
 def forbidden(error) -> str:
     """Error handler: Forbidden"""
     return jsonify({"error": "Forbidden"}), 403
+
 @app.before_request
 def before_requests():
     """doc doc"""
@@ -39,7 +40,6 @@ def before_requests():
         abort(401)
     if auth.current_user(request) is None:
         abort(403)
-
 
 
 if __name__ == "__main__":
