@@ -29,7 +29,7 @@ def forbidden(error) -> str:
     return jsonify({"error": "Forbidden"}), 403
 
 @app.before_request
-def before_requests():
+def before_request():
     """doc doc"""
     if auth is None:
        return
