@@ -3,6 +3,7 @@
 from api.v1.auth.auth import Auth
 import base64
 
+
 class BasicAuth(Auth):
     """basic auth"""
     def extract_base64_authorization_header(self,
@@ -29,4 +30,3 @@ class BasicAuth(Auth):
             return decoded_byte.decode('utf-8')
         except Exception:
             return None
-            
