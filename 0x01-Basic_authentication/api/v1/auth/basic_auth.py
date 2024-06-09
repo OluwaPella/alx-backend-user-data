@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """doc doc """
 from api.v1.auth.auth import Auth
-
+import base64
 
 class BasicAuth(Auth):
     """basic auth"""
@@ -23,7 +23,10 @@ class BasicAuth(Auth):
             return None
         if not isinstance(base64_authorization_header, str):
             return None
+        if not base64_authorization_header:
+            return None
         try:
-            return base64_authorization_header.encode('utf-8').decode('utf-8')
+            return base64.b64decode(base64_authorization_header).decode('utf-8')
         except Exception:
-            return base64_authorization_header.encode('utf-8')                                 
+            return None
+            
