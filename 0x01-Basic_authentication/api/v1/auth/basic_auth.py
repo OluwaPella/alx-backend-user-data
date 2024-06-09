@@ -37,12 +37,12 @@ class BasicAuth(Auth):
             return None
         if not isinstance(decoded_base64_authorization_header, str):
             return None
-        if ':' not in decoded_base64_authorization_header:
+        # check for colon separator
+        try:
+            email, password = decoded_base64_authorization_header.split(':', 1)
+            return email, password
+        except Exception:
             return None
-        else:
-            credentials = decoded_base64_authorization_header.split(':', 1)
-            return credentials
-
         
     
     
