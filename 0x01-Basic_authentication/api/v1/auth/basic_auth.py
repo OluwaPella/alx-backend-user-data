@@ -40,4 +40,4 @@ class BasicAuth(Auth):
         if ':' not in decoded_base64_authorization_header:
             return None
         else:
-            return tuple(decoded_base64_authorization_header.split(':', 1))
+            return decoded_base64_authorization_header.split(':', 1)
