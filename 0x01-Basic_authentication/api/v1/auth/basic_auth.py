@@ -39,7 +39,7 @@ class BasicAuth(Auth):
             return None
         # check for colon separator
         try:
-            email, password = decoded_base64_authorization_header.split(':', 1)
+            email, password = decoded_base64_authorization_header.split(':')
             return email, password
         except Exception:
             return None
