@@ -48,8 +48,8 @@ class BasicAuth(Auth):
         except ValueError:
             return None
 
-    def user_object_from_credentials(self, user_email: str, 
-                                    user_pwd: str) -> TypeVar('User'):
+    def user_object_from_credentials(self, user_email: str,
+                                user_pwd: str) -> TypeVar('User'):
         """this logic retrieves a user object based on email and password"""
         if user_email is None or not isinstance(user_email, str):
             return None
@@ -62,3 +62,12 @@ class BasicAuth(Auth):
                     return user
         except Exception:
             return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Retrieves the User object from the request using Basic Auth.""" 
+        auth_header = self.authorization_header(request)
+        base_64 = self.extract_base64_authorization_header(auth_header)
+        decode_64 = self.decode_base64_authorization_header(base_64)
+        username_password = self.extract_user_credentials(decode_64)
+        return self.user_object_from_credentials(auth_header)
+
