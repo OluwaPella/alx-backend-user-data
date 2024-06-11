@@ -47,7 +47,7 @@ class BasicAuth(Auth):
             return None
 
     def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
-        """user object from credentials"""
+        """this logic retrieves a user object based on email and password"""
         if user_email is None or not isinstance(user_email, str):
             return None
         if user_pwd is None or not isinstance(user_pwd, str):
@@ -55,10 +55,8 @@ class BasicAuth(Auth):
         user_data = User.search(email=user_email)
         if not user_data:
             return None
-        if User:
-            User = Users[0]
-            if not user.is_valid_password(user_pwd):
-                return None
+        user = users_data[0]
+        if not user.is_valid_password(user_pwd):
+            return None
 
-
-        
+        return user 
