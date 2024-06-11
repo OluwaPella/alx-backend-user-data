@@ -56,6 +56,6 @@ class BasicAuth(Auth):
             user_data = User.search(email=user_email)
             for user in user_data:
                 if user.is_valid_password(user_pwd):
-            return user
+                    return user
         except Exception:
             return None
