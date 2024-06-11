@@ -2,7 +2,6 @@
 """doc doc """
 from flask import request
 from typing import List, TypeVar
-import re
 
 
 class Auth:
@@ -12,8 +11,7 @@ class Auth:
         """logic that check if auth is required or not"""
         if path is None or excluded_paths is None or len(excluded_paths) == 0:
             return True
-        for exclude in excluded_paths:
-            if re.match(exclude.path.replace("*", "*"), path):
+            if not path = "*"
                 return False
         return True
 
