@@ -25,8 +25,8 @@ class Auth:
             
             if re.match(checked, path):
                 return False
-
-            return True
+            
+        return True
 
     def authorization_header(self, request=None) -> str:
         """logic that check auth header"""
