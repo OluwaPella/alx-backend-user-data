@@ -21,23 +21,12 @@ class Auth:
             elif excluded_path[-1] == '/':
                 checked = '{}/*'.format(excluded_path[:-1])
             else:
-                check = '{}/*'.format(excluded_path)
+                checked = '{}/*'.format(excluded_path)
             
-            if re.match(check, path):
+            if re.match(checked, path):
                 return False
 
             return True
-
-            
-
-    
-
-
-
-pen_spark
-
-        
-                return False
 
     def authorization_header(self, request=None) -> str:
         """logic that check auth header"""
