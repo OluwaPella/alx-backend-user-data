@@ -2,6 +2,7 @@
 """doc doc """
 from flask import request
 from typing import List, TypeVar
+import re
 
 
 class Auth:
@@ -10,10 +11,33 @@ class Auth:
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """logic that check if auth is required or not"""
         if path is None or excluded_paths is None or len(excluded_paths) == 0:
-            return True
-            if not path = "*"
+                return True
+        for excluded_path in excluded_paths:
+             excluded_path =  excluded_path.strip()
+             
+             checked = ''
+             if excluded_path[-1] == '*':
+                checked = '{}.*'.format(excluded_path[:-1])
+            elif excluded_path[-1] == '/':
+                checked = '{}/*'.format(excluded_path[:-1])
+            else:
+                check = '{}/*'.format(excluded_path)
+            
+            if re.match(check, path):
                 return False
-        return True
+
+            return True
+
+            
+
+    
+
+
+
+pen_spark
+
+        
+                return False
 
     def authorization_header(self, request=None) -> str:
         """logic that check auth header"""
