@@ -39,7 +39,7 @@ def before_requests():
         abort(401)
     if auth.current_user(request) is None:
         abort(403)
-    request.current_user
+    request.current_user = auth.request.current_user
 
 
 
