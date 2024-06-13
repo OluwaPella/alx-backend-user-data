@@ -18,14 +18,13 @@ class Auth:
              checked = ''
              if excluded_path[-1] == '*':
                 checked = '{}.*'.format(excluded_path[:-1])
-                elif excluded_path[-1] == '/':
+            elif excluded_path[-1] == '/':
                 checked = '{}/*'.format(excluded_path[:-1])
             else:
                 checked = '{}/*'.format(excluded_path)
-            
             if re.match(checked, path):
                 return False
-            
+                    
         return True
 
     def authorization_header(self, request=None) -> str:
