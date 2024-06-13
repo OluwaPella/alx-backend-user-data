@@ -18,7 +18,7 @@ class Auth:
              checked = ''
              if excluded_path[-1] == '*':
                 checked = '{}.*'.format(excluded_path[:-1])
-                elif excluded_path[-1] == '/':
+            elif excluded_path[-1] == '/':
                 checked = '{}/*'.format(excluded_path[:-1])
             else:
                 checked = '{}/*'.format(excluded_path)
