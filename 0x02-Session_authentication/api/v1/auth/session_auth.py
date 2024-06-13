@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """session auth"""
 from api.v1.auth.auth import Auth
-
-
+import uuid
 class SessionAuth(Auth):
     """doc doc"""
     user_id_by_session_id = {}
