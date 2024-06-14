@@ -2,6 +2,7 @@
 """session auth"""
 from api.v1.auth.auth import Auth
 from uuid import uuid4
+import os
 
 
 class SessionAuth(Auth):
@@ -27,3 +28,10 @@ class SessionAuth(Auth):
             return None
         else:
             return self.user_id_by_session_id.get(session_id)
+        
+    def session_cookie(self, request=None):
+        """this instance method returns a Session cookie"""
+        if request is None:
+            return None
+        _my_session_id = os.getenv('SESSION_NAME')
+        return request.cookies.get(_my_session_id, None)
