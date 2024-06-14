@@ -25,7 +25,6 @@ if auth_type == "session_auth":
     auth = SessionAuth()
 
 
-
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """an unauthorize function"""
@@ -47,6 +46,7 @@ def before_requests():
                               '/api/v1/unauthorized/',
                               '/api/v1/forbidden/']):
           return
+    
     if auth.authorization_header(request) is None:
         abort(401)
     if auth.current_user(request) is None:
