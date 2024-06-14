@@ -3,8 +3,8 @@
 from api.v1.auth.auth import Auth
 import uuid
 
-class SessionAuth(Auth):
 
+class SessionAuth(Auth):
     """session auth"""
     user_id_by_session_id = {}
 
