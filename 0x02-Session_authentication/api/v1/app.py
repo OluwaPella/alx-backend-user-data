@@ -40,6 +40,10 @@ def forbidden(error) -> str:
 @app.before_request
 def before_requests():
     """doc doc"""
+    if auth.authorization_header(request) and auth.session_cookie(request):
+        return None
+    abort(401)
+
     if auth is None:
         return
     if not auth.require_auth(request.path,
@@ -54,9 +58,6 @@ def before_requests():
     if auth.current_user(request) is None:
         abort(403)
     request.current_user = auth.current_user(request)
-    if auth.authorization_header(request) and auth.session_cookie(request):
-        return None 
-    abort(401)
 
 
 if __name__ == "__main__":
