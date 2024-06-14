@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """session auth"""
 from api.v1.auth.auth import Auth
-import uuid
-
+from uuid import uuid4
 
 class SessionAuth(Auth):
     """session auth"""
@@ -15,7 +14,7 @@ class SessionAuth(Auth):
         if not isinstance(user_id, str):
             return None
         else:
-            session_id = uuid.uuid4()
+            session_id =  str(uuid4())
             self.user_id_by_session_id[session_id] = user_id
         return session_id
 
