@@ -3,6 +3,7 @@
 from api.v1.auth.auth import Auth
 from uuid import uuid4
 
+
 class SessionAuth(Auth):
     """session auth"""
     user_id_by_session_id = {}
@@ -14,7 +15,7 @@ class SessionAuth(Auth):
         if not isinstance(user_id, str):
             return None
         else:
-            session_id =  str(uuid4())
+            session_id = str(uuid4())
             self.user_id_by_session_id[session_id] = user_id
         return session_id
 
@@ -26,3 +27,4 @@ class SessionAuth(Auth):
             return None
         else:
             return self.user_id_by_session_id.get(session_id)
+        
