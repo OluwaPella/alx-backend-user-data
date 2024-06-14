@@ -50,8 +50,7 @@ def before_requests():
         return
     
     if auth.authorization_header(request) and auth.session_cookie(request):
-        return None
-    abort(401)
+        return None, abort(401)
 
 
     if auth.authorization_header(request) is None:
