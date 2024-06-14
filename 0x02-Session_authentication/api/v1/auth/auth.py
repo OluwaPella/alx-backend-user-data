@@ -20,7 +20,7 @@ class Auth:
              elif excluded_path[-1] == '/':
                  checked = '{}/*'.format(excluded_path[:-1])
              else:
-                 checked = '{}/*'.format(excluded_path)
+                 checked = '{}*/'.format(excluded_path)
                  if re.match(checked, path):
                      return False
         return True
