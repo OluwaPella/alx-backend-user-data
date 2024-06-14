@@ -25,6 +25,18 @@ if auth_type == "session_auth":
     auth = SessionAuth()
 
 
+
+@app.errorhandler(401)
+def unauthorized(error) -> str:
+    """an unauthorize function"""
+    return jsonify({"error": "Unauthorized"}), 401
+
+
+@app.errorhandler(403)
+def forbidden(error) -> str:
+    """Error handler: Forbidden"""
+    return jsonify({"error": "Forbidden"}), 403
+
 @app.before_request
 def before_requests():
     """doc doc"""
@@ -39,20 +51,8 @@ def before_requests():
         abort(401)
     if auth.current_user(request) is None:
         abort(403)
-    request.current_user = auth.request.current_user
+    request.current_user = auth.current_user(request)
 
-
-
-@app.errorhandler(401)
-def unauthorized(error) -> str:
-    """an unauthorize function"""
-    return jsonify({"error": "Unauthorized"}), 401
-
-
-@app.errorhandler(403)
-def forbidden(error) -> str:
-    """Error handler: Forbidden"""
-    return jsonify({"error": "Forbidden"}), 403
 
 
 if __name__ == "__main__":
