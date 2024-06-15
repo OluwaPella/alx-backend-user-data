@@ -54,7 +54,7 @@ def before_requests():
     if auth.current_user(request) is None:
         abort(403)
     request.current_user = auth.current_user(request)
-    if auth.authorization_header(request) and auth.session_cookie(request):
+    if auth.authorization_header(request) or auth.session_cookie(request):
         return None, abort(401)
 
 if __name__ == "__main__":
