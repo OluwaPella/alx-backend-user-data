@@ -40,8 +40,6 @@ def forbidden(error) -> str:
 @app.before_request
 def before_requests():
     """doc doc"""
-    if auth is None:
-        return
     if not auth.require_auth(request.path,
                              ['/api/v1/status/',
                               '/api/v1/unauthorized/',
