@@ -37,7 +37,7 @@ def forbidden(error) -> str:
     return jsonify({"error": "Forbidden"}), 403
 
 excluded_path = ['/api/v1/auth_session/login/']
-if auth.authorization_header(request) and not auth.session_cookie (request):
+if auth.authorization_header(request)  and auth.session_cookie (request):
     abort(401)
     
 
