@@ -29,10 +29,13 @@ class SessionAuth(Auth):
         else:
             return self.user_id_by_session_id.get(session_id)
     
-    def session_cookie(self, request=None):
-        """this logic return cookie value from request"""
+    def current_user(self, request=None):
+        """this instance method returns a User instance based on a cookie value"""
         if request is None:
-            return  None
-        return 
-        
+            return None
+        session_cookie = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_cookie)
+        return self.user_id_by_session_id.get(user_id)
+
+    
         
