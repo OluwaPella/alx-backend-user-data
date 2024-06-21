@@ -2,8 +2,7 @@
 """session auth"""
 from api.v1.auth.auth import Auth
 from uuid import uuid4
-
-
+from models.user import User
 
 class SessionAuth(Auth):
     """session auth"""
@@ -31,11 +30,9 @@ class SessionAuth(Auth):
     
     def current_user(self, request=None):
         """this instance method returns a User instance based on a cookie value"""
-        if request is None:
-            return None
-        session_cookie = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session_cookie)
-        return self.user_id_by_session_id.get(user_id)
+        session_token = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_token)
+        return User.get(user_id)
 
     
         
