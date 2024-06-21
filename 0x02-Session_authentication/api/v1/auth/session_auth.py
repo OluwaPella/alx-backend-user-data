@@ -28,7 +28,7 @@ class SessionAuth(Auth):
             return None
         else:
             return self.user_id_by_session_id.get(session_id)
-    
+
     def current_user(self, request=None):
         """this instance method returns a User
           instance based on a cookie value"""
