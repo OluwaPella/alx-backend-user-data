@@ -22,5 +22,5 @@ def login() -> str:
     session_id = auth.create_session(user.id)
     user_data = user.to_json()
     response = jsonify(user_data)
-    response.set_cookie(os.environ["SESSION_NAME"], session_id)
+    response.set_cookie(os.environ["SESSION_NAME"], session_id, httponly=True)
     return response
