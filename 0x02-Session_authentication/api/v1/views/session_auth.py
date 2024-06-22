@@ -10,12 +10,12 @@ def login() -> str:
     """doc doc"""
     email = request.get('email')
     password = request.get("password")
-    if email is None:
+    if not email:
         return jsonify({"error":"email missing"}), 400
-    if password is None:
+    if not password:
         return jsonify({"eeror": "password missing"}), 400
     user = User.serach({"email": email})
-    if user is None:
+    if  not user:
         return jsonify({"error": "password missing"})
     if not user.is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
