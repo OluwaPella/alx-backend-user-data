@@ -4,7 +4,7 @@ from models import User
 """session auth"""
 @app.route('/api/v1/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> str:
-    """login function"""
+    """doc doc"""
     email = request.get('email')
     password = request.get("password")
     if email is None:
