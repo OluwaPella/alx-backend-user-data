@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""doc doc"""
 from flask import request, jsonify
 from models import User
 from api.v1.views import app
