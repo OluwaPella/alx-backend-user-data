@@ -2,8 +2,9 @@
 """doc doc"""
 from flask import request, jsonify
 from models import User
+from api.v1.views import app_views
 import os
-@app.route('/api/v1/auth_session/login', methods=['POST'], strict_slashes=False)
+@app_views.route('/api/v1/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> str:
     """POST /api/v1/auth_session/login
     Return:
