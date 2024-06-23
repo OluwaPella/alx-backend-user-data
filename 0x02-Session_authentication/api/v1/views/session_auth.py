@@ -13,5 +13,10 @@ def login() -> str:
     if email is None or len(email) == 0:
         return jsonify({"error": "email missing"}), 400
     if password is None or len(password) == 0:
-        return jsonify({"error": "password missing"})
+        return jsonify({"error": "password missing"}), 400
+    user_data = User.search('email')
+    if not user_data:
+        return jsonify({"error": "no user found for this email"}), 404
+    if User.is_valid_password(user_data[0], password):
+
     
