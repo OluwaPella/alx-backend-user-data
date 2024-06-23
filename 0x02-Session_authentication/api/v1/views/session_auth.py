@@ -2,7 +2,6 @@
 """doc doc"""
 from flask import request, jsonify
 from models import User
-from api.v1.app import auth, app
 import os
 @app.route('/api/v1/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> str:
@@ -20,9 +19,10 @@ def login() -> str:
     if  not user:
         return jsonify({"error": "password missing"})
     if not user.is_valid_password(password):
-        return jsonify({"error": "wrong password"}), 401
-    session_id = auth.create_session(user.id)
-    user_data = user.to_json()
-    response = jsonify(user_data)
-    response.set_cookie(os.environ["SESSION_NAME"], session_id, httponly=True)
-    return response
+        from api.v1.app import auth
+        session_id = auth.create_session(user.id)
+        user_data = user.to_json()
+        response = jsonify(user_data)
+        response.set_cookie(os.getenv("SESSION_NAME"), session_id)
+        return response
+    return jsonify({"error": "wrong password"}), 401
