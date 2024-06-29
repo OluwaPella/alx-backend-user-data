@@ -22,9 +22,9 @@ def login() -> str:
         from api.v1.app import auth
         """create session_id"""
         session_id = auth.create_session(getattr(user_data[0], 'id'))
-        re = user_data[0].to_json()
-        re.set_cookie(os.getenv("SESSION_NAME"), session_id)
-        return re
+        user = jsonify(user_data[0].to_json())
+        user.set_cookie(os.getenv("SESSION_NAME"), session_id)
+        return user
     return jsonify({"error": "wrong password"}), 401
 
 
