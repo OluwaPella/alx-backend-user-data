@@ -2,11 +2,11 @@
 """doc doc"""
 from flask import request, jsonify
 import os
-from api.v1.views import app
+from api.v1.views import app_views
 from models.user import User
 
 
-@app.route('/auth_session/login', methods=['POST'], strict_slashes=False)
+@app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> str:
     """this logic login and create session"""
     email = request.form.get("email")
@@ -29,7 +29,6 @@ def login() -> str:
     user = User.to_json()
     request.set_cookie(os.environ.get("SESSION_NAME"), session_id)
     return user
-
 
 
 
