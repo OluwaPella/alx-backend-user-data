@@ -15,7 +15,7 @@ def login() -> str:
     password = request.form.get("password")
     if password is None or len(password) == 0:
         return jsonify({"error": "password missing"}), 400
-    user_data = User.search(f'email="{email}"')
+    user_data = User.search({'email': email})
     if len(user_data) == 0:
         return jsonify({"error": "no user found for this email"}), 404
     user = user_data[0]
