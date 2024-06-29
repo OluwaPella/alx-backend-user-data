@@ -10,9 +10,9 @@ from models.user import User
 def login() -> str:
     """this logic login and create session"""
     email = request.form.get("email")
-    password = request.form.get("password")
     if email is None or len(email) == 0:
         return jsonify({"error": "email missing"}), 400
+    password = request.form.get("password")
     if password is None or len(password) == 0:
         return jsonify({"error": "password missing"}), 400
     user_data = User.search(f'email="{email}"')
