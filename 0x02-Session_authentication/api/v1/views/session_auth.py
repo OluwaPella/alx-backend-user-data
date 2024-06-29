@@ -27,7 +27,7 @@ def login() -> str:
     if not session_id:
         return None
     user = User.to_json()
-    response.set_cookie(os.environ.get("SESSION_NAME"), session_id)
+    user.set_cookie(os.environ.get("SESSION_NAME"), session_id)
     return user
 
 
