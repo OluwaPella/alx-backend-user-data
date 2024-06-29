@@ -18,17 +18,17 @@ def login() -> str:
     user_data = User.search('email==email')
     if not user_data:
         return jsonify({"error": "no user found for this email"}), 404
-    if User.is_valid_password(password):
-         return jsonify({"error": "wrong password"}), 401
-    from api.v1.app import auth
-    """create session_id"""
-    session_id = auth.create_session(user_data[0].id)
-    """ check if session creation was successful"""
-    if not session_id:
-        return None
-    user = User[0].to_json()
-    user.set_cookie(os.getenv("SESSION_NAME"), session_id)
-    return user
+    if user_data[0].is_valid_password(password):
+        from api.v1.app import auth
+        """create session_id"""
+        session_id = auth.create_session(getattr(user_data[0], 'id'))
+        """ check if session creation was successful"""
+        if not session_id:
+            return None
+        user = user_data[0].to_json()
+        user.set_cookie(os.getenv("SESSION_NAME"), session_id)
+        return user
+    return jsonify({"error": "wrong password"}), 401
 
 
 
