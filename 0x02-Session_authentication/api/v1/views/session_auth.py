@@ -2,12 +2,13 @@
 """doc doc"""
 from flask import request, jsonify
 import os
+from typing import Tuple
 from api.v1.views import app_views
 from models.user import User
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
-def login() -> str:
+def login() -> Tuple[str, int]:
     """this logic login and create session"""
     email = request.form.get("email")
     password = request.form.get("password")
@@ -21,9 +22,9 @@ def login() -> str:
     if user_data[0].is_valid_password(password):
         from api.v1.app import auth
         """create session_id"""
-        session_id = auth.create_session(getattr(user_data[0], 'id'))
+        sessiond_id = auth.create_session(getattr(user_data[0], 'id'))
         user = jsonify(user_data[0].to_json())
-        user.set_cookie(os.getenv("SESSION_NAME"), session_id)
+        user.set_cookie(os.getenv("SESSION_NAME"), sessiond_id)
         return user
     return jsonify({"error": "wrong password"}), 401
 
