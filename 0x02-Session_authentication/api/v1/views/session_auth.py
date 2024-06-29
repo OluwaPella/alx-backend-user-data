@@ -23,11 +23,6 @@ def login() -> str:
     from api.v1.app import auth
     session_id = auth.create_session(user_data.id)
     user = User.to_json()
-    if session_id:
-        response = jsonify(user)
-        response.set_cookie(os.environ.get("SESSION_NAME"), session_id)
-        return response
-    return jsonify(user)
 
 
 
