@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """doc doc"""
-from flask import request, jsonify
+from flask import request, jsonify, abort
 import os
 from api.v1.views import app_views
 from models.user import User
@@ -35,4 +35,4 @@ def logout() -> str:
     if auth.destroy_session(request):
         return jsonify({}), 200
     else:
-        return False, abort(404)
+        abort(404)
