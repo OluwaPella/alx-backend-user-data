@@ -5,6 +5,7 @@ import os
 from api.v1.views import app_views
 from models.user import User
 
+
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> str:
     """this logic login and create session"""
@@ -17,16 +18,12 @@ def login() -> str:
     user_data = User.search(f'email="{email}"')
     if not user_data:
         return jsonify({"error": "no user found for this email"}), 404
-    if user_data[0].is_valid_password(password):
-        from api.v1.app import auth
-        """create session_id"""
-        sessiond_id = auth.create_session(getattr(user_data[0], 'id'))
-        user = user_data[0].to_json()
-        user.set_cookie(os.getenv("SESSION_NAME"), sessiond_id)
-        return user
-    return jsonify({"error": "wrong password"}), 401
-
-
-
-
-
+    if not user_data[0].is_valid_password(password):
+        return jsonify({"error": "wrong password"}), 401
+    from api.v1.app import auth
+    """create session_id"""
+    sessiond_id = auth.create_session(getattr(user_data[0], 'id'))
+    user = user_data[0].to_json()
+    user.set_cookie(os.getenv("SESSION_NAME"), sessiond_id)
+    return user
+  
