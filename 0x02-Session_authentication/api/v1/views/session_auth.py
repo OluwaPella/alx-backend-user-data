@@ -26,5 +26,3 @@ def login() -> str:
     res = jsonify(user.to_json())
     res.set_cookie(os.getenv('SESSION_NAME'), session_id)
     return res
-
-
