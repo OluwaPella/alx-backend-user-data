@@ -18,7 +18,7 @@ def login() -> str:
     user_data = User.search(f'email="{email}"')
     if not user_data:
         return jsonify({"error": "no user found for this email"}), 404
-    if not user_data[0].is_valid_password(password):
+    if user_data[0].is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
     from api.v1.app import auth
     """create session_id"""
