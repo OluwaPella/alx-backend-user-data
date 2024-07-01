@@ -30,9 +30,10 @@ def login() -> str:
         return res
 
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/auth_session/logout', methods=['DELETE'])
 def logout() -> str:
     """this logic logout and destroy session"""
     if auth.destroy_session(request):
         return jsonify({}), 200
-    abort(404)
+    else:
+        abort(404)
