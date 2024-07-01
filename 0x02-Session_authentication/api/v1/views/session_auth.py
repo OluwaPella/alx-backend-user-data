@@ -35,5 +35,4 @@ def logout() -> str:
     """this logic logout and destroy session"""
     if auth.destroy_session(request):
         return jsonify({}), 200
-    else:
-        abort(404)
+    abort(404)
