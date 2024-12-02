@@ -39,7 +39,17 @@ def forbidden(error) -> str:
 
 @app.before_request
 def before_requests():
-    """doc doc"""
+    """
+    Checks if authorization is required for the
+    requested path. If authorization is required,
+    it checks if the Authorization header is present.
+    If the Authorization header is not present,
+    a 401 error is returned. If the Authorization
+    header is present but the user doesn't exist,
+    a 403 error is returned.
+    """
+    # Check if authorization is required
+
     if not auth.require_auth(request.path,
                              ['/api/v1/status/',
                               '/api/v1/unauthorized/',
@@ -47,12 +57,19 @@ def before_requests():
                               '/api/v1/auth_session/login/']):
         return
 
+    # Check if Authorization header is present
     if auth.authorization_header(request) is None:
         abort(401)
+
+    # Check if user exists
     if auth.current_user(request) is None:
         abort(403)
+
+    # Add current user to request object
     request.current_user = auth.current_user(request)
-    if auth.authorization_header(request) and auth.session_cookie (request):
+
+    # Check if session cookie is present for Basic Auth
+    if auth.authorization_header(request) and auth.session_cookie(request):
         abort(401)
    
 
